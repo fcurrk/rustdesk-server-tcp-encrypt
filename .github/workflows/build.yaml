@@ -16,7 +16,8 @@ env:
   API_SERVER: "${{ secrets.API_SERVER }}"
   TAG_NAME: "${{ inputs.upload-tag }}"
   UPLOAD_ARTIFACT: "${{ inputs.upload-artifact }}"
-  LATEST_TAG: "latest"
+  CARGO_TERM_COLOR: always
+  LATEST_TAG: latest
 
 permissions:
    contents: write 
@@ -45,7 +46,7 @@ jobs:
       - name: Install toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: "1.87.0"
+          toolchain: stable
           override: true
           default: true
           components: rustfmt
@@ -85,7 +86,7 @@ jobs:
       - name: Install toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: "1.87.0"
+          toolchain: stable
           override: true
           default: true
           components: rustfmt
