@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Open Rustdesk Support Team <ymwlpoolc@qq.com>
 Build-Depends: debhelper (>= 10), pkg-config
 Standards-Version: 4.5.0
-Homepage: https://github.com/wy414012/rustdesk-server/
+Homepage: https://github.com/fcurrk/rustdesk-server-tcp-encrypt/
 
 Package: rustdesk-server-hbbs
 Architecture: {{ ARCH }}
