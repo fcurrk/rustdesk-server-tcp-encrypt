@@ -1,6 +1,5 @@
 target
 id*
-db*
 debian-build
 debian/.debhelper
 debian/debhelper-build-stamp
