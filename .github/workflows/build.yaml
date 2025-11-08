@@ -24,7 +24,7 @@ permissions:
 jobs:
   build:
     name: Build - ${{ matrix.job.name }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -167,7 +167,7 @@ jobs:
     needs: 
       - build
       - build-win
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -208,7 +208,7 @@ jobs:
   docker:
     name: Docker push - ${{ matrix.job.name }}
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -279,7 +279,7 @@ jobs:
 
     name: Docker manifest
     needs: docker
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
 
@@ -329,7 +329,7 @@ jobs:
   docker-classic:
     name: Docker push - ${{ matrix.job.name }}
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -396,7 +396,7 @@ jobs:
   docker-manifest-classic:
     name: Docker manifest
     needs: docker
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
 
       - name: Log in to Docker Hub
@@ -444,7 +444,7 @@ jobs:
   deb-package:
     name: debian package - ${{ matrix.job.name }}
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
