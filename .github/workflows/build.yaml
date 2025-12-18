@@ -52,12 +52,6 @@ jobs:
           components: rustfmt
           profile: minimal
           target: ${{ matrix.job.target }}
-          
-      - name: Install OpenSSL
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pkg-config libssl-dev
-          echo "OPENSSL_DIR=/usr" >> $GITHUB_ENV
 
       - name: Build
         uses: actions-rs/cargo@v1
