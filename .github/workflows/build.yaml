@@ -16,8 +16,7 @@ env:
   API_SERVER: "${{ secrets.API_SERVER }}"
   TAG_NAME: "${{ inputs.upload-tag }}"
   UPLOAD_ARTIFACT: "${{ inputs.upload-artifact }}"
-  CARGO_TERM_COLOR: always
-  LATEST_TAG: latest
+  LATEST_TAG: "latest"
 
 permissions:
    contents: write 
@@ -25,7 +24,7 @@ permissions:
 jobs:
   build:
     name: Build - ${{ matrix.job.name }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -44,15 +43,15 @@ jobs:
           submodules: recursive
 
       - name: Install toolchain
-        uses: actions-rs/toolchain@v1
+        uses: fcurrk/toolchain@master
         with:
-          toolchain: stable
+          toolchain: "stable"
           override: true
           default: true
           components: rustfmt
           profile: minimal
           target: ${{ matrix.job.target }}
-
+          
       - name: Build
         uses: actions-rs/cargo@v1
         with:
@@ -84,9 +83,9 @@ jobs:
           submodules: recursive
 
       - name: Install toolchain
-        uses: actions-rs/toolchain@v1
+        uses: fcurrk/toolchain@master
         with:
-          toolchain: stable
+          toolchain: "stable"
           override: true
           default: true
           components: rustfmt
@@ -131,7 +130,7 @@ jobs:
 
       - name: Build UI setup file
         run: |
-          rustup default 1.87.0
+          rustup default stable
           cargo build --release
           xcopy /y ..\target\x86_64-pc-windows-msvc\release\*.exe setup\bin\
           xcopy /y target\release\*.exe setup\
@@ -168,7 +167,7 @@ jobs:
     needs: 
       - build
       - build-win
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -209,7 +208,7 @@ jobs:
   docker:
     name: Docker push - ${{ matrix.job.name }}
     needs: build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -280,7 +279,7 @@ jobs:
 
     name: Docker manifest
     needs: docker
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
 
     steps:
 
@@ -330,7 +329,7 @@ jobs:
   docker-classic:
     name: Docker push - ${{ matrix.job.name }}
     needs: build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -397,7 +396,7 @@ jobs:
   docker-manifest-classic:
     name: Docker manifest
     needs: docker
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
 
       - name: Log in to Docker Hub
@@ -445,7 +444,7 @@ jobs:
   deb-package:
     name: debian package - ${{ matrix.job.name }}
     needs: build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
